@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stacked Slider</title>
+<style>
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    scroll-behavior: smooth;
+  }
+
+  .slider {
+    position: relative;
+    width: 100%;
+    max-width: 900px;
+    margin: 50px auto;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .slide {
+    position: relative;
+    width: 100%;
+    height: 200px;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    opacity: 0.3;
+    transition: all 0.5s ease;
+    background-color: #222;
+    transform: scale(0.95);
+  }
+
+  .slide.active {
+    opacity: 1; 
+    z-index: 2;
+    height: 500px;
+    transform: scale(1);
+  }
+
+  .slide-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    max-width: 50%;
+    transition: transform 0.5s ease;
+  }
+
+  .slide.active .slide-content {
+    transform: translateX(0);
+  }
+
+  .slide-content h2 {
+    margin: 0 0 10px;
+    font-size: 32px;
+    transition: font-size 0.3s ease;
+  }
+
+  .slide.active .slide-content h2 {
+    font-size: 42px;
+  }
+
+  .slide-content p {
+    margin: 0;
+    font-size: 18px;
+    transition: opacity 0.3s ease;
+  }
+
+  .slide-image img {
+    max-width: 400px;
+    max-height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    transform: translateX(50px);
+  }
+
+  .slide.active .slide-image img{
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  /* Navigation buttons */
+  .nav-button {
+    position: absolute;
+    top: 10%;
+    transform: translateY(-50%);
+    background-color: rgba(255,255,255,0.2);
+    border: none;
+    color: white;
+    font-size: 24px;
+    padding: 10px 15px;
+    cursor: pointer;
+    z-index: 3;
+    pointer-events: none;
+    opacity: 0;
+    transition: all 0.3s ease;
+    border-radius: 5px;
+  }
+
+  .nav-button:hover {
+    background-color: rgba(255,255,255,0.4);
+    transform: translateY(-50%) scale(1.1);
+  }
+
+  .slide.active .nav-button{
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .nav-button.left {
+    left: 10px;
+  }
+
+  .nav-button.right {
+    left: 70px;
+  }
+
+  /* Pagination dots */
+  .dots {
+    position: absolute;
+    bottom: 15px;
+    right: 10%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  
+  .slide.active .dots {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .dot {
+    width: 12px;
+    height: 12px;
+    background-color: rgba(255,255,255,0.5);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .dot:hover {
+    transform: scale(1.2);
+    background-color: rgba(255,255,255,0.7);
+  }
+
+  .dot.active {
+    background-color: white;
+    transform: scale(1.3);
+  }
+</style>
+</head>
+<body>
+
+<div class="slider">
+  <!-- Slides -->
+  <div class="slide active" data-slide="0">
+    <div class="slide-content">
+      <h2>Slide 1</h2>
+      <p>This is the first slide</p>
+    </div>
+    <div class="slide-image">
+      <img src="https://picsum.photos/400/300?random=1" alt="Slide 1">
+    </div>
+    <button class="nav-button left">&#10094;</button>
+    <button class="nav-button right">&#10095;</button>
+    <div class="dots">
+        <div class="dot active" data-slide="0"></div>
+        <div class="dot" data-slide="1"></div>
+        <div class="dot" data-slide="2"></div>
+        <div class="dot" data-slide="3"></div>
+        <div class="dot" data-slide="4"></div>
+        <div class="dot" data-slide="5"></div>
+      </div>
+  </div>
+
+  <div class="slide" data-slide="1">
+    <div class="slide-content">
+      <h2>Slide 2</h2>
+      <p>This is the second slide</p>
+    </div>
+    <div class="slide-image">
+      <img src="https://picsum.photos/400/300?random=2" alt="Slide 2">
+    </div>
+    <button class="nav-button left">&#10094;</button>
+    <button class="nav-button right">&#10095;</button>
+    <div class="dots">
+        <div class="dot" data-slide="0"></div>
+        <div class="dot active" data-slide="1"></div>
+        <div class="dot" data-slide="2"></div>
+        <div class="dot" data-slide="3"></div>
+        <div class="dot" data-slide="4"></div>
+        <div class="dot" data-slide="5"></div>
+      </div>
+  </div>
+
+  <div class="slide" data-slide="2">
+    <div class="slide-content">
+      <h2>Slide 3</h2>
+      <p>This is the third slide</p>
+    </div>
+    <div class="slide-image">
+      <img src="https://picsum.photos/400/300?random=3" alt="Slide 3">
+    </div>
+    <button class="nav-button left">&#10094;</button>
+    <button class="nav-button right">&#10095;</button>
+    <div class="dots">
+        <div class="dot" data-slide="0"></div>
+        <div class="dot" data-slide="1"></div>
+        <div class="dot active" data-slide="2"></div>
+        <div class="dot" data-slide="3"></div>
+        <div class="dot" data-slide="4"></div>
+        <div class="dot" data-slide="5"></div>
+      </div>
+  </div>
+
+  <div class="slide" data-slide="3">
+    <div class="slide-content">
+      <h2>Slide 4</h2>
+      <p>This is the fourth slide</p>
+    </div>
+    <div class="slide-image">
+      <img src="https://picsum.photos/400/300?random=4" alt="Slide 4">
+    </div>
+    <button class="nav-button left">&#10094;</button>
+    <button class="nav-button right">&#10095;</button>
+    <div class="dots">
+        <div class="dot" data-slide="0"></div>
+        <div class="dot" data-slide="1"></div>
+        <div class="dot" data-slide="2"></div>
+        <div class="dot active" data-slide="3"></div>
+        <div class="dot" data-slide="4"></div>
+        <div class="dot" data-slide="5"></div>
+      </div>
+  </div>
+
+  <div class="slide" data-slide="4">
+    <div class="slide-content">
+      <h2>Slide 5</h2>
+      <p>This is the fifth slide</p>
+    </div>
+    <div class="slide-image">
+      <img src="https://picsum.photos/400/300?random=5" alt="Slide 5">
+    </div>
+    <button class="nav-button left">&#10094;</button>
+    <button class="nav-button right">&#10095;</button>
+    <div class="dots">
+        <div class="dot" data-slide="0"></div>
+        <div class="dot" data-slide="1"></div>
+        <div class="dot" data-slide="2"></div>
+        <div class="dot" data-slide="3"></div>
+        <div class="dot active" data-slide="4"></div>
+        <div class="dot" data-slide="5"></div>
+      </div>
+  </div>
+
+  <div class="slide" data-slide="5">
+    <div class="slide-content">
+      <h2>Slide 6</h2>
+      <p>This is the sixth slide</p>
+    </div>
+    <div class="slide-image">
+      <img src="https://picsum.photos/400/300?random=6" alt="Slide 6">
+    </div>
+    <button class="nav-button left">&#10094;</button>
+    <button class="nav-button right">&#10095;</button>
+    <div class="dots">
+        <div class="dot" data-slide="0"></div>
+        <div class="dot" data-slide="1"></div>
+        <div class="dot" data-slide="2"></div>
+        <div class="dot" data-slide="3"></div>
+        <div class="dot" data-slide="4"></div>
+        <div class="dot active" data-slide="5"></div>
+      </div>
+  </div>
+</div>
+
+<script>
+// Global variables
+let slides = [];
+let totalSlides = 0;
+let currentSlide = 0;
+
+// Initialize the slider
+function initSlider() {
+  slides = document.querySelectorAll('.slide');
+  totalSlides = slides.length;
+  
+  // Add event listeners for navigation buttons
+  slides.forEach((slide, index) => {
+    const leftBtn = slide.querySelector('.nav-button.left');
+    const rightBtn = slide.querySelector('.nav-button.right');
+    
+    leftBtn.addEventListener('click', goToPreviousSlide);
+    rightBtn.addEventListener('click', goToNextSlide);
+  });
+  
+  // Add event listeners for pagination dots
+  slides.forEach(slide => {
+    const dots = slide.querySelectorAll('.dot');
+    dots.forEach(dot => {
+      dot.addEventListener('click', function() {
+        const targetSlide = parseInt(this.getAttribute('data-slide'));
+        goToSlide(targetSlide);
+      });
+    });
+  });
+}
+
+// Go to specific slide
+function goToSlide(slideIndex) {
+  // Remove active class from current slide
+  slides[currentSlide].classList.remove('active');
+  
+  // Update current slide index
+  currentSlide = slideIndex;
+  
+  // Add active class to new slide
+  slides[currentSlide].classList.add('active');
+  
+  // Smooth scroll to the active slide
+  slides[currentSlide].scrollIntoView({
+    behavior: 'smooth',
+    block: 'center'
+  });
+  
+  // Update pagination dots for all slides
+  updateAllDots();
+}
+
+// Go to next slide
+function goToNextSlide() {
+  const nextSlide = (currentSlide + 1) % totalSlides;
+  goToSlide(nextSlide);
+}
+
+// Go to previous slide
+function goToPreviousSlide() {
+  const prevSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+  goToSlide(prevSlide);
+}
+
+// Update all pagination dots
+function updateAllDots() {
+  slides.forEach(slide => {
+    const dots = slide.querySelectorAll('.dot');
+    dots.forEach((dot, index) => {
+      if (index === currentSlide) {
+        dot.classList.add('active');
+      } else {
+        dot.classList.remove('active');
+      }
+    });
+  });
+}
+
+// Initialize when page loads
+document.addEventListener('DOMContentLoaded', initSlider);
+</script>
+</body>
+</html>
