@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ultra Slow Sequential Reveal</title>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+      }
+      .parent {
+        height: 400vh;
+        overflow: hidden;
+        position: relative;
+        display: block;
+      }
+      body {
+        font-family: sans-serif;
+        background: #111;
+        overflow-x: hidden;
+      }
+
+      .color-teal {
+        color: #5d978f;
+      }
+      .color-gray {
+        color: #666666;
+      }
+      .color-white {
+        color: #ffffff;
+      }
+      .color-black {
+        color: #1f1f1f;
+      }
+
+      .slides-container {
+        position: fixed;
+        top: 00;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        overflow: hidden;
+      }
+
+      .slide-1,
+      .slide-2,
+      .slide-3,
+      .slide-4 {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 100vh;
+        width: 100%;
+        clip-path: inset(0% 0% 0% 0%);
+      }
+
+      .slide-1 {
+        background: #1f1f1f;
+        z-index: 4;
+      }
+      .slide-2 {
+        background: #5d978f;
+        z-index: 3;
+      }
+      .slide-3 {
+        background: #ffffff;
+        z-index: 2;
+      }
+      .slide-4 {
+        background: #e9f6f6;
+        z-index: 1;
+      }
+
+      .slide-left,
+      .slide-right {
+        flex: 1;
+        height: 100%;
+      }
+
+      .slide-left {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+        padding: 40px;
+        justify-content: center;
+      }
+
+      .slide-left-top {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .slide-secondary-title {
+        font-size: 42px;
+        line-height: 1.3;
+        font-weight: bold;
+      }
+
+      .slide-title {
+        font-size: 24px;
+        line-height: 1.4;
+        font-weight: normal;
+      }
+
+      .slide-dsc {
+        font-size: 18px;
+        line-height: 1.6;
+      }
+
+      .slide-img {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+        display: block;
+      }
+
+      .slide-right {
+        display: flex;
+        align-items: center;
+      }
+
+      .scroll-spacer {
+        height: 4800vh;
+      }
+
+      .slide-img {
+        width: 100%;
+        height: 100%;
+        display: block;
+      }
+
+      .hundred-vh {
+        height: 100vh;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="hundred-vh"></div>
+    <div class="parent">
+      <div class="slides-container">
+        <div class="slide-1">
+          <div class="slide-left">
+            <div class="slide-left-top">
+              <h2 class="slide-secondary-title color-teal">売買仲介</h2>
+              <h4 class="slide-title color-white">
+                表参道・青山・原宿に特化した 長年の知識や経験、情報量が強みです
+              </h4>
+            </div>
+            <p class="slide-dsc color-white">
+              世界の投資家から注目される東京・表参道。
+              この地に根ざした当社ならではのネットワークと培った経験をもとに、購入から将来的な売却までワンストップでサポートいたします。
+            </p>
+          </div>
+          <div class="slide-right">
+            <img src="/assets/img01.jpg" alt="slider-img" class="slide-img" />
+          </div>
+        </div>
+
+        <div class="slide-2">
+          <div class="slide-left">
+            <div class="slide-left-top">
+              <h2 class="slide-secondary-title color-white">賃貸仲介</h2>
+              <h4 class="slide-title color-white">
+                地域密着だから可能な 「旬」な情報をご提供いたします
+              </h4>
+            </div>
+            <p class="slide-dsc color-white">
+              豊富な取引事例から「今」の相場を的確に アドバイスいたします。
+              また、長年の信頼関係により、ビルオーナー様から
+              直接依頼された情報を多数保有しており、
+              立地条件とご予算に応じた優良物件の情報をご提供いたします。
+            </p>
+          </div>
+          <div class="slide-right">
+            <img src="/assets/img02.jpg" alt="slider-img" class="slide-img" />
+          </div>
+        </div>
+
+        <div class="slide-3">
+          <div class="slide-left">
+            <div class="slide-left-top">
+              <h2 class="slide-secondary-title color-teal">不動産再生</h2>
+              <h4 class="slide-title color-black">
+                自社で不動産を取得から運営まで
+              </h4>
+            </div>
+            <p class="slide-dsc color-black">
+              長年培ってきたノウハウを活かし、リノベーションやコンバージョン行うことで、物件そのものや周辺環境への調和を再定義し、運用しています。
+            </p>
+          </div>
+          <div class="slide-right">
+            <img src="/assets/img03.jpg" alt="slider-img" class="slide-img" />
+          </div>
+        </div>
+
+        <div class="slide-4">
+          <div class="slide-left">
+            <div class="slide-left-top">
+              <h2 class="slide-secondary-title color-teal">建物管理</h2>
+              <h4 class="slide-title color-black">
+                資産の価値を最大限に引き出す お手伝いならお任せください
+              </h4>
+            </div>
+            <p class="slide-dsc color-gray">
+              テナント募集から建物管理やクレーム対応などの
+              不動産経営に関わる業務を一元対応できる万全の体制を整えています。
+            </p>
+          </div>
+          <div class="slide-right">
+            <img src="/assets/img04.jpg" alt="slider-img" class="slide-img" />
+          </div>
+        </div>
+      </div>
+
+      <div class="scroll-spacer"></div>
+    </div>
+    <div class="hundred-vh"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+    <script>
+      gsap.registerPlugin(ScrollTrigger);
+
+      const slides = [".slide-1", ".slide-2", ".slide-3", ".slide-4"];
+      const totalSlides = slides.length;
+
+      const transitionDistance = 800;
+      ScrollTrigger.create({
+        trigger: ".parent",
+        start: "top bottom",
+        end: "bottom top",
+        onEnter: () => {
+          slidesContainer.classList.add("mounted");
+        },
+        onLeave: () => {
+          slidesContainer.classList.remove("mounted");
+        },
+        onEnterBack: () => {
+          slidesContainer.classList.add("mounted");
+        },
+        onLeaveBack: () => {
+          slidesContainer.classList.remove("mounted");
+        },
+      });
+
+      slides.forEach((slideSelector, i) => {
+        if (i < slides.length - 1) {
+          gsap.to(slideSelector, {
+            clipPath: "inset(0% 0% 100% 0%)",
+            ease: "none",
+            scrollTrigger: {
+              trigger: ".scroll-spacer",
+              start: `${i * transitionDistance}vh top`,
+              end: `${(i + 1) * transitionDistance}vh top`,
+              scrub: 2,
+              onUpdate: (self) => {
+                const progress = self.progress;
+                const element = document.querySelector(slideSelector);
+                element.style.transform = `translateY(${progress * -2}px)`;
+              },
+            },
+          });
+        }
+      });
+    </script>
+  </body>
+</html>
